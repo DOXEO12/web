@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Peruana</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #F4F9F9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #E57373;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .question p {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            background-color: #FFEBEE;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .options li:hover {
+            background-color: #FFCDD2;
+        }
+        .options li.correct {
+            background-color: #C8E6C9;
+        }
+        .options li.incorrect {
+            background-color: #FFCDD2;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer p {
+            font-size: 18px;
+            color: #607D8B;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦙 Trivia Peruana: ¡Descubre lo Nuestro! 🇵🇪</h1>
+
+        <div class="question">
+            <p>1. ¿Cuál es el animal que vive en los Andes y es famoso por su lana suave?</p>
+            <img src="Alpaca.jpeg" alt="Alpaca">
+            <ul class="options">
+                <li>A) Alpaca</li>
+                <li>B) Llama</li>
+                <li>C) Vicuña</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>2. ¿Cómo se llama la famosa ciudad inca construida en lo alto de las montañas?</p>
+            <img src="Machupichu.jpeg" alt="Machu Picchu">
+            <ul class="options">
+                <li>A) Cusco</li>
+                <li>B) Machu Picchu</li>
+                <li>C) Ollantaytambo</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>3. ¿Cuál es el baile tradicional de la costa peruana que se baila con pañuelos?</p>
+            <img src="Marinera.jpeg" alt="Marinera">
+            <ul class="options">
+                <li>A) Festejo</li>
+                <li>B) Marinera</li>
+                <li>C) Huayno</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <p>4. ¿Qué alimento es considerado uno de los principales ingredientes de la gastronomía peruana?</p>
+            <img src="PAPA.jpeg" alt="Papa">
+            <ul class="options">
+                <li>A) Quinua</li>
+                <li>B) Ají</li>
+                <li>C) Papa</li>
+            </ul>
+        </div>
+
+        <div class="result">
+            <p id="resultMessage"></p>
+        </div>
+
+        <div class="footer">
+            <p>¡Esperamos que hayas aprendido algo nuevo sobre Perú! 🇵🇪</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = ['A', 'B', 'B', 'C'];
+        let score = 0;
+        const options = document.querySelectorAll('.options');
+
+        options.forEach((optionList, index) => {
+            optionList.addEventListener('click', function(event) {
+                const selectedOption = event.target;
+                const selectedAnswer = selectedOption.textContent.trim().charAt(0);
+
+                if (selectedAnswer === correctAnswers[index]) {
+                    selectedOption.classList.add('correct');
+                    score++;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                }
+
+                optionList
+                optionList.querySelectorAll('li').forEach(option => {
+                    option.style.pointerEvents = 'none'; // Deshabilitar todas las opciones después de seleccionar
+                });
+
+                if (index === options.length - 1) { // Si es la última pregunta
+                    document.querySelector('.result').style.display = 'block';
+                    const resultMessage = document.getElementById('resultMessage');
+                    resultMessage.textContent = `¡Has respondido correctamente ${score} de ${correctAnswers.length} preguntas!`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
